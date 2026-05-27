@@ -17,12 +17,11 @@ def recomendar_peliculas(req: RecommendationRequest):
         raise HTTPException(status_code=400, detail="Debes proveer al menos un género o una película favorita.")
 
     # 1. Preparar argumentos para Prolog de forma limpia
-    # Esto une los elementos usando una coma verdadera: ['peli1', 'peli2', 'peli3']
     generos_pl = "[" + ",".join([f"'{g.lower().strip()}'" for g in req.generos]) + "]" if req.generos else "[]"
     favoritas_pl = "[" + ",".join([f"'{f.lower().strip()}'" for f in req.favoritas]) + "]" if req.favoritas else "[]"
 
-    # Consulta Prolog que unifica la variable 'X' con las recomendaciones
-    query = f"recomendar({favoritas_pl}, {generos_pl}, X), writeln(X), halt."
+    # Cambiamos el query para que imprima cada película en una línea separada
+    query = f"recomendar({favoritas_pl}, {generos_pl}, X), forall(member(P, X), writeln(P)), halt."
     prolog_file = "/app/prolog/knowledge_base.pl"
 
     try:
@@ -31,12 +30,13 @@ def recomendar_peliculas(req: RecommendationRequest):
             ["swipl", "-q", "-s", prolog_file, "-g", query],
             capture_output=True, text=True, check=True
         )
-        # La salida de Prolog será un formato tipo ["Peli 1", "Peli 2"]
+        
+        # Capturamos la salida y la limpiamos
         output_prolog = prolog_process.stdout.strip()
         
-        # Reemplazar comillas simples por dobles para parsearlo como JSON Array en Python/Scala
-        output_prolog = output_prolog.replace("'", '"')
-        candidatas = json.loads(output_prolog) if output_prolog else []
+        # Convertimos las líneas impresas por Prolog en una lista limpia de Python
+        candidatas = [line.strip() for line in output_prolog.splitlines() if line.strip()]
+        
     except Exception as e:
          raise HTTPException(status_code=500, detail=f"Error ejecutando Prolog: {str(e)}")
 

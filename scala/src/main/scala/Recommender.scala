@@ -40,9 +40,9 @@ object Recommender {
       } else None
     }
 
-    // Filtrado cruzando la data con las seleccionadas por Prolog y ordenando descendentemente (Ranking de Puntuación)
+    // Filtrado cruzando la data con las seleccionadas por Prolog (ambos llevados a minúsculas)
     val recomendadasOrdenadas = peliculas
-      .filter(m => candidatas.contains(m.nombre.toLowerCase))
+      .filter(m => candidatas.contains(m.nombre.trim.toLowerCase))
       .sortBy(_.puntuacion)(Ordering[Double].reverse)
 
     // Construcción limpia y funcional del String JSON de salida para transferir de vuelta a Python
