@@ -1,17 +1,29 @@
-# Estructura multi-stage para compilar Scala sin ensuciar la imagen final
+# ==========================================
+# ETAPA 1: Compilar Scala (Multi-stage)
+# ==========================================
 FROM hseeberger/scala-sbt:8u312_1.6.2_2.13.8 AS scala-builder
 WORKDIR /build
 COPY scala /build
 RUN sbt assembly
 
-# Imagen Base Final basada en Python
-FROM python:3.11-slim
+# ==========================================
+# ETAPA 2: Imagen Base Final (Estable y limpia)
+# ==========================================
+FROM ubuntu:22.04
 
-# Instalar dependencias del sistema: SWI-Prolog y Java Runtime para Scala
+# Evitar prompts interactivos durante la instalación de paquetes
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependencias del sistema: Python, SWI-Prolog y Java
 RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3-pip \
     swi-prolog \
     default-jre \
     && rm -rf /var/lib/apt/lists/*
+
+# Crear un enlace simbólico para poder usar 'python' en lugar de 'python3.11'
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
 
 WORKDIR /app
 
@@ -24,7 +36,7 @@ COPY pelis.csv .
 COPY app/ ./app
 COPY prolog/ ./prolog
 
-# Copiar el JAR compilado desde la primera etapa de construcción
+# Copiar el JAR compilado desde la etapa de construcción de Scala
 COPY --from=scala-builder /build/target/scala-2.13/movie-recommender-assembly-1.0.jar ./scala/target/scala-2.13/
 
 EXPOSE 8000
