@@ -16,10 +16,10 @@ def recomendar_peliculas(req: RecommendationRequest):
     if not req.favoritas and not req.generos:
         raise HTTPException(status_code=400, detail="Debes proveer al menos un género o una película favorita.")
 
-    # 1. Preparar argumentos para Prolog
-    # Formateamos las listas para que Prolog las entienda como listas de átomos: [item1, item2]
-    generos_pl = "[" + "," + "".join([f"'{g.lower().strip()}'" for g in req.generos]) + "]" if req.generos else "[]"
-    favoritas_pl = "[" + "," + "".join([f"'{f.lower().strip()}'" for f in req.favoritas]) + "]" if req.favoritas else "[]"
+    # 1. Preparar argumentos para Prolog de forma limpia
+    # Esto une los elementos usando una coma verdadera: ['peli1', 'peli2', 'peli3']
+    generos_pl = "[" + ",".join([f"'{g.lower().strip()}'" for g in req.generos]) + "]" if req.generos else "[]"
+    favoritas_pl = "[" + ",".join([f"'{f.lower().strip()}'" for f in req.favoritas]) + "]" if req.favoritas else "[]"
 
     # Consulta Prolog que unifica la variable 'X' con las recomendaciones
     query = f"recomendar({favoritas_pl}, {generos_pl}, X), writeln(X), halt."
