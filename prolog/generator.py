@@ -19,7 +19,6 @@ def generar_prolog():
             for g in generos:
                 facts.append(f"genero('{name}', '{g}').")
                 
-    # Reglas lógicas de recomendación genéricas
     rules = """
 % Verifica si una película comparte género con un elemento de la lista de gustos
 comparte_genero(Peli, [G|Resto]) :- genero(Peli, G); comparte_genero(Peli, Resto).

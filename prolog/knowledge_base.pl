@@ -14,10 +14,10 @@ genero('the godfather part ii', 'drama').
 director('pulp fiction', 'quentin tarantino').
 genero('pulp fiction', 'crimen').
 genero('pulp fiction', 'drama').
-director('schindler\'s list', 'steven spielberg').
-genero('schindler\'s list', 'biografia').
-genero('schindler\'s list', 'drama').
-genero('schindler\'s list', 'historia').
+director('schindlers list', 'steven spielberg').
+genero('schindlers list', 'biografia').
+genero('schindlers list', 'drama').
+genero('schindlers list', 'historia').
 director('inception', 'christopher nolan').
 genero('inception', 'accion').
 genero('inception', 'ciencia ficcion').
@@ -34,8 +34,8 @@ director('goodfellas', 'martin scorsese').
 genero('goodfellas', 'biografia').
 genero('goodfellas', 'crimen').
 genero('goodfellas', 'drama').
-director('one flew over the cuckoo\'s nest', 'milos forman').
-genero('one flew over the cuckoo\'s nest', 'drama').
+director('one flew over the cuckoos nest', 'milos forman').
+genero('one flew over the cuckoos nest', 'drama').
 director('seven', 'david fincher').
 genero('seven', 'crimen').
 genero('seven', 'drama').
@@ -139,10 +139,10 @@ director('jurassic park', 'steven spielberg').
 genero('jurassic park', 'accion').
 genero('jurassic park', 'aventura').
 genero('jurassic park', 'ciencia ficcion').
-director('kill bill: vol. 1', 'quentin tarantino').
-genero('kill bill: vol. 1', 'accion').
-genero('kill bill: vol. 1', 'crimen').
-genero('kill bill: vol. 1', 'thriller').
+director('kill bill vol 1', 'quentin tarantino').
+genero('kill bill vol 1', 'accion').
+genero('kill bill vol 1', 'crimen').
+genero('kill bill vol 1', 'thriller').
 director('shutter island', 'martin scorsese').
 genero('shutter island', 'misterio').
 genero('shutter island', 'thriller').
@@ -165,10 +165,10 @@ director('gone girl', 'david fincher').
 genero('gone girl', 'drama').
 genero('gone girl', 'misterio').
 genero('gone girl', 'thriller').
-director('mad max: fury road', 'george miller').
-genero('mad max: fury road', 'accion').
-genero('mad max: fury road', 'aventura').
-genero('mad max: fury road', 'ciencia ficcion').
+director('mad max fury road', 'george miller').
+genero('mad max fury road', 'accion').
+genero('mad max fury road', 'aventura').
+genero('mad max fury road', 'ciencia ficcion').
 director('catch me if you can', 'steven spielberg').
 genero('catch me if you can', 'biografia').
 genero('catch me if you can', 'crimen').
