@@ -7,6 +7,22 @@ from typing import List
 
 app = FastAPI(title="Polyglot Movie Recommender API")
 
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "https://fororataback.onrender.com",
+    "https://fororata.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class RecommendationRequest(BaseModel):
     generos: List[str]
     favoritas: List[str]
