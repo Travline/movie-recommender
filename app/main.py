@@ -12,8 +12,8 @@ origins = [
     "http://localhost:5173",
     "http://localhost:3000",
     "http://localhost:8000",
-    "https://fororataback.onrender.com",
-    "https://fororata.vercel.app"
+    "https://movie-recommender-no03.onrender.com",
+    "https://vga-recommender.vercel.app"
 ]
 
 app.add_middleware(
