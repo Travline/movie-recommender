@@ -1,6 +1,7 @@
 import os
 import json
 import subprocess
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
